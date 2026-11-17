@@ -15,8 +15,10 @@ app = FastAPI(
     version="1.0.0",
     description="Predict UCS and Young's Modulus from six mineralogical and physical inputs using four trained models.",
 )
-app.mount("/static", StaticFiles(directory=BASE / "static"), name="static")
 
+STATIC_DIR = BASE / "static"
+STATIC_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 FiniteNumber = Annotated[float, Field(strict=True)]
 
 class PredictionInput(BaseModel):
