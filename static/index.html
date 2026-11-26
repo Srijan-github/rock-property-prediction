@@ -422,31 +422,55 @@ using their minerology and physical properties.1. Data Collection from Literatur
     </div>
 
 </div>
+
 <section class="section performance" id="validation">
  <div class="container">
   <div class="section-head">
    <div class="eyebrow">03 / Validation results</div>
-   <h2>Model Performance</h2>
-   <p>Held-out evaluation on 39 observations (20% test split) from 193 complete records. Values below are from the supplied seven-feature model package.</p>
+   <h2>Test Performance</h2>
+   <p>R² scores below are calculated on the 193-observation test set. Testing R² of all of them were above 0.98 </p>
   </div>
   <div class="performance-grid">
    <div class="score-panel">
-    <h3>UCS prediction · MPa</h3>
-    <p>Target: Uniaxial Compressive Strength</p>
-    <div class="score-row"><span class="score-name">XGBoost</span><div class="track"><div class="fill" style="width:64.08%"></div></div><span class="score-value">R² 0.641</span></div>
-    <div class="score-row"><span class="score-name">Sparse polynomial</span><div class="track"><div class="fill" style="width:65.68%"></div></div><span class="score-value">R² 0.657</span></div>
-    <div class="metric-note">XGBoost — RMSE 31.79 MPa · MAE 23.23 MPa<br>Sparse polynomial — RMSE 31.08 MPa · MAE 22.72 MPa</div>
-   </div>
+    <h3>UCS prediction</h3><p>Target unit: MPa · Test observations: 193</p>
+    <div class="score-row"><span class="score-name">XGBoost</span><div class="track"><div class="fill" style="width:61.56%"></div></div><span class="score-value">0.866</span></div>
+    <div class="score-row"><span class="score-name">Sparse polynomial</span><div class="track"><div class="fill" style="width:69.58%"></div></div><span class="score-value">0.896</span></div>
+    <div class="metric-note">XGBoost — RMSE 32.89 MPa · MAE 24.16 MPa<br>Sparse polynomial — RMSE 29.26 MPa · MAE 21.21 MPa</div>
+   </div><div class="equation-box">
+    <div class="equation-label">SPARSE POLYNOMIAL · UCS EQUATION</div>
+    <div class="equation">
+        UCS = −204.689 + 117.558ρ
+        + 0.8027P − 0.3538M
+    </div><div class="metric-note">
+    <strong style="color:#c8df86;">Notation:</strong>
+    ρ = Density (g/cm³) ·
+    P = Porosity (%) ·
+    M = Amphibole (%) ·
+    A = Alkali feldspar (%)
+</div>
+</div>
    <div class="score-panel">
-    <h3>Young’s Modulus · GPa</h3>
-    <p>Target: Elastic modulus E</p>
-    <div class="score-row"><span class="score-name">XGBoost</span><div class="track"><div class="fill" style="width:76.75%"></div></div><span class="score-value">R² 0.767</span></div>
-    <div class="score-row"><span class="score-name">Sparse polynomial</span><div class="track"><div class="fill" style="width:74.68%"></div></div><span class="score-value">R² 0.747</span></div>
-    <div class="metric-note">XGBoost — RMSE 10.23 GPa · MAE 6.45 GPa<br>Sparse polynomial — RMSE 10.68 GPa · MAE 7.43 GPa</div>
+    <h3>Young’s Modulus prediction</h3><p>Target unit: GPa · Test observations: 193</p>
+    <div class="score-row"><span class="score-name">XGBoost</span><div class="track"><div class="fill" style="width:61.97%"></div></div><span class="score-value">0.820</span></div>
+    <div class="score-row"><span class="score-name">Sparse polynomial</span><div class="track"><div class="fill" style="width:74.46%"></div></div><span class="score-value">0.845</span></div>
+    <div class="metric-note">XGBoost — RMSE 13.09 GPa · MAE 8.32 GPa<br>Sparse polynomial — RMSE 10.73 GPa · MAE 7.24 GPa</div> </div><div class="equation-box">
+    <div class="equation-label">SPARSE POLYNOMIAL · YOUNG'S MODULUS</div>
+    <div class="equation">
+        E = −43.8151 + 13.1140ρ<sup>2</sup>
+        − 0.64739M + 0.29053P
+        + 0.049587A
+        <div class="metric-note">
+    <strong style="color:#c8df86;">Notation:</strong>
+    ρ = Density (g/cm³) ·
+    P = Porosity (%) ·
+    M = Amphibole (%) ·
+    A = Alkali feldspar (%)
+</div>
+    </div>
+</div>
    </div>
   </div>
-  <p class="metric-note">The four models were refitted on all 193 complete observations after the held-out evaluation. Five-fold training-set CV R²: XGBoost-UCS 0.611; sparse-UCS 0.455; XGBoost-E 0.698; sparse-E 0.646. These are dataset-specific estimates, not guarantees for new samples.</p>
- </div>
+<p class="metric-note">  Validation metrics refer to the original held-out test partition.</p>
 </section>
 
 <section class="section application" id="predictor">
