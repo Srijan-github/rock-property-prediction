@@ -1,0 +1,103 @@
+{
+  "package_name": "Rock_Property_Prediction_Models_Seven_Features",
+  "source_dataset": "master.csv",
+  "usable_records": 193,
+  "training_records": 154,
+  "testing_records": 39,
+  "test_size": 0.2,
+  "random_state": 42,
+  "input_order": [
+    {
+      "name": "Plagioclase feldspar",
+      "key": "plagioclase",
+      "unit": "%"
+    },
+    {
+      "name": "Amphibole",
+      "key": "amphibole",
+      "unit": "%"
+    },
+    {
+      "name": "Quartz",
+      "key": "quartz",
+      "unit": "%"
+    },
+    {
+      "name": "Alkali feldspar",
+      "key": "alkali_feldspar",
+      "unit": "%"
+    },
+    {
+      "name": "Density",
+      "key": "density",
+      "unit": "g/cm³"
+    },
+    {
+      "name": "Porosity",
+      "key": "porosity",
+      "unit": "%"
+    },
+    {
+      "name": "Mica",
+      "key": "mica",
+      "unit": "%"
+    }
+  ],
+  "targets": {
+    "UCS": "MPa",
+    "E": "GPa"
+  },
+  "model_details": {
+    "XGBoost_UCS": {
+      "best_params": {
+        "subsample": 0.7,
+        "reg_lambda": 5,
+        "reg_alpha": 0,
+        "n_estimators": 200,
+        "min_child_weight": 3,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "colsample_bytree": 0.85
+      },
+      "cv_r2": 0.610694117335606
+    },
+    "Sparse_Polynomial_UCS": {
+      "degree": 2,
+      "total_polynomial_terms": 35,
+      "nonzero_terms": 15,
+      "alpha": 1.747528400007683,
+      "cv_r2_mean": 0.45493048739700753,
+      "cv_r2_std": 0.15147583669654352
+    },
+    "XGBoost_E": {
+      "best_params": {
+        "subsample": 0.7,
+        "reg_lambda": 1,
+        "reg_alpha": 0.01,
+        "n_estimators": 200,
+        "min_child_weight": 1,
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "colsample_bytree": 0.7
+      },
+      "cv_r2": 0.6975783042708084
+    },
+    "Sparse_Polynomial_E": {
+      "degree": 2,
+      "total_polynomial_terms": 35,
+      "nonzero_terms": 11,
+      "alpha": 0.8697490026177834,
+      "cv_r2_mean": 0.6462106486152418,
+      "cv_r2_std": 0.10718043137063307
+    }
+  },
+  "performance_summary_csv": "model_performance_summary.csv",
+  "model_files": {
+    "xgboost_ucs": "XGBoost_UCS.joblib",
+    "xgboost_e": "XGBoost_E.joblib",
+    "sparse_polynomial_ucs": "Sparse_Polynomial_UCS.joblib",
+    "sparse_polynomial_e": "Sparse_Polynomial_E.joblib"
+  },
+  "model_validation": "Held-out test metrics and training-set cross-validation metrics are reported in model_performance_summary.csv. The final four model objects were trained with seven features.",
+  "mica_range_note": "The package does not provide the empirical minimum and maximum for Mica; the web form accepts 0–100% and does not claim an observed training range for this feature."
+}
