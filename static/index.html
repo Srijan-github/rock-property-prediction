@@ -428,49 +428,90 @@ using their minerology and physical properties.1. Data Collection from Literatur
   <div class="section-head">
    <div class="eyebrow">03 / Validation results</div>
    <h2>Test Performance</h2>
-   <p>R² scores below are calculated on the 193-observation test set. Testing R² of all of them were above 0.98 </p>
+   <p>R² scores below are calculated on the 193-observation test set.</p>
   </div>
+
   <div class="performance-grid">
+
    <div class="score-panel">
-    <h3>UCS prediction</h3><p>Target unit: MPa · Test observations: 193</p>
+    <h3>UCS prediction</h3>
+    <p>Target unit: MPa · Test observations: 193</p>
     <div class="score-row"><span class="score-name">XGBoost</span><div class="track"><div class="fill" style="width:61.56%"></div></div><span class="score-value">0.866</span></div>
     <div class="score-row"><span class="score-name">Sparse polynomial</span><div class="track"><div class="fill" style="width:69.58%"></div></div><span class="score-value">0.896</span></div>
     <div class="metric-note">XGBoost — RMSE 32.89 MPa · MAE 24.16 MPa<br>Sparse polynomial — RMSE 29.26 MPa · MAE 21.21 MPa</div>
-   </div><div class="equation-box">
+   </div>
+
+   <div class="equation-box">
     <div class="equation-label">SPARSE POLYNOMIAL · UCS EQUATION</div>
     <div class="equation">
-        UCS = −204.689 + 117.558ρ
-        + 0.8027P − 0.3538M
-    </div><div class="metric-note">
-    <strong style="color:#c8df86;">Notation:</strong>
-    ρ = Density (g/cm³) ·
-    P = Porosity (%) ·
-    M = Amphibole (%) ·
-    A = Alkali feldspar (%)
-</div>
-</div>
+        UCS = 145.3416
+        − 0.018139F<sup>2</sup>
+        − 0.025737FA
+        + 2.515416F
+        + 0.011291a<sup>2</sup>
+        − 0.007411aq
+        − 0.014348ap
+        + 0.006610qA
+        + 0.109075q
+        + 0.043198Ap
+        + 0.026814Am
+        + 0.662781A
+        + 18.167124d<sup>2</sup>
+        − 58.173182d
+        − 3.870422p
+        − 1.299467m
+    </div>
+    <div class="metric-note">
+     <strong style="color:#c8df86;">Notation:</strong>
+     F = Plagioclase feldspar (%) ·
+     a = Amphibole (%) ·
+     q = Quartz (%) ·
+     A = Alkali feldspar (%) ·
+     m = Mica (%) ·
+     d = Density (g/cm³) ·
+     p = Porosity (%)
+    </div>
+   </div>
+
    <div class="score-panel">
-    <h3>Young’s Modulus prediction</h3><p>Target unit: GPa · Test observations: 193</p>
+    <h3>Young’s Modulus prediction</h3>
+    <p>Target unit: GPa · Test observations: 193</p>
     <div class="score-row"><span class="score-name">XGBoost</span><div class="track"><div class="fill" style="width:61.97%"></div></div><span class="score-value">0.820</span></div>
     <div class="score-row"><span class="score-name">Sparse polynomial</span><div class="track"><div class="fill" style="width:74.46%"></div></div><span class="score-value">0.845</span></div>
-    <div class="metric-note">XGBoost — RMSE 13.09 GPa · MAE 8.32 GPa<br>Sparse polynomial — RMSE 10.73 GPa · MAE 7.24 GPa</div> </div><div class="equation-box">
+    <div class="metric-note">XGBoost — RMSE 13.09 GPa · MAE 8.32 GPa<br>Sparse polynomial — RMSE 10.73 GPa · MAE 7.24 GPa</div>
+   </div>
+
+   <div class="equation-box">
     <div class="equation-label">SPARSE POLYNOMIAL · YOUNG'S MODULUS</div>
     <div class="equation">
-        E = −43.8151 + 13.1140ρ<sup>2</sup>
-        − 0.64739M + 0.29053P
-        + 0.049587A
-        <div class="metric-note">
-    <strong style="color:#c8df86;">Notation:</strong>
-    ρ = Density (g/cm³) ·
-    P = Porosity (%) ·
-    M = Amphibole (%) ·
-    A = Alkali feldspar (%)
-</div>
+        E = 113.4608
+        − 0.005172FA
+        + 0.017614Fm
+        + 0.341703F
+        − 0.079437a
+        − 0.381613Ad
+        + 1.219877A
+        + 29.070274d<sup>2</sup>
+        − 100.502717d
+        − 0.845017p
+        − 0.946063m
     </div>
-</div>
+    <div class="metric-note">
+     <strong style="color:#c8df86;">Notation:</strong>
+     F = Plagioclase feldspar (%) ·
+     a = Amphibole (%) ·
+     q = Quartz (%) ·
+     A = Alkali feldspar (%) ·
+     m = Mica (%) ·
+     d = Density (g/cm³) ·
+     p = Porosity (%)
+    </div>
    </div>
+
   </div>
-<p class="metric-note">  Validation metrics refer to the original held-out test partition.</p>
+ </div>
+
+ <p class="metric-note">Validation metrics refer to the original held-out test partition.</p>
 </section>
 
 <section class="section application" id="predictor">
@@ -494,9 +535,10 @@ using their minerology and physical properties.1. Data Collection from Literatur
        <div class="field"><label for="amphibole">Amphibole</label><small>CONTENT · %</small><input id="amphibole" type="number" min="0" max="100" step="any" required placeholder="e.g. 20"></div>
        <div class="field"><label for="quartz">Quartz</label><small>CONTENT · %</small><input id="quartz" type="number" min="0" max="100" step="any" required placeholder="e.g. 15"></div>
        <div class="field"><label for="alkali_feldspar">Alkali feldspar</label><small>CONTENT · %</small><input id="alkali_feldspar" type="number" min="0" max="100" step="any" required placeholder="e.g. 15"></div>
+        <div class="field"><label for="mica">Mica</label><small>CONTENT · %</small><input id="mica" type="number" min="0" max="100" step="any" required placeholder="e.g. 5"></div>
        <div class="field"><label for="density">Density</label><small>g/cm³</small><input id="density" type="number" min="0" step="any" required placeholder="e.g. 2.70"></div>
        <div class="field"><label for="porosity">Porosity</label><small>CONTENT · %</small><input id="porosity" type="number" min="0" max="100" step="any" required placeholder="e.g. 1.0"></div>
-       <div class="field"><label for="mica">Mica</label><small>CONTENT · %</small><input id="mica" type="number" min="0" max="100" step="any" required placeholder="e.g. 5"></div>
+      
       </div>
       <button class="predict-btn" id="predictButton" type="submit">Run four-model prediction&nbsp; ↗</button>
       <div class="form-status" id="status" role="status" aria-live="polite"></div>
